@@ -8,3 +8,4 @@ srcDir = "src"
 
 requires "nim >= 1.0.2"
 requires "opengl >= 1.2.3"
+requires "winim >= 3.3.5"

@@ -3,6 +3,7 @@ when defined(emscripten):
 else:
   when defined(windows):
     when defined(gcc):
+      import winim/core
       {.passC: "-D_GLFW_WIN32", passL: "-lopengl32 -lgdi32".}
     when defined(vcc):
       {.passC: "-D_GLFW_WIN32".}
@@ -438,6 +439,7 @@ proc setMonitorCallback*(cbfun: MonitorFun): MonitorFun {.cdecl, importc: "glfwS
 proc setGamma*(monitor: Monitor, gamma: cfloat) {.cdecl, importc: "glfwSetGamma".}
 proc setGammaRamp*(monitor: Monitor, ramp: ptr GammaRamp) {.cdecl, importc: "glfwSetGammaRamp".}
 # Window functions
+proc getWin32Window*(window: Window): HWND {.cdecl, importc: "glfwGetWin32Window".}
 proc createWindow*(width: cint, height: cint, title: cstring, monitor: Monitor, share: Window): Window{.cdecl, importc: "glfwCreateWindow".}
 proc defaultWindowHints*() {.cdecl, importc: "glfwDefaultWindowHints".}
 proc destroyWindow*(window: Window) {.cdecl, importc: "glfwDestroyWindow".}
