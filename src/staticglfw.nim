@@ -2,8 +2,8 @@ when defined(emscripten):
   {.passL: "-s USE_WEBGL2=1 -s USE_GLFW=3".}
 else:
   when defined(windows):
+    import winim/core
     when defined(gcc):
-      import winim/core
       {.passC: "-D_GLFW_WIN32", passL: "-lopengl32 -lgdi32".}
     when defined(vcc):
       {.passC: "-D_GLFW_WIN32".}
