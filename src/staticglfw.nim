@@ -37,7 +37,8 @@ else:
       compile: "staticglfw/osmesa_context.c"
     .}
   elif defined(linux):
-    import x11/x as x11
+    import x11/x as x
+    import x11/xlib as xlib
     {.passL: "-pthread -lGL -lX11 -lXrandr -lXxf86vm -lXi -lXcursor -lm -lXinerama".}
 
     when defined(wayland):
@@ -443,7 +444,8 @@ proc setGammaRamp*(monitor: Monitor, ramp: ptr GammaRamp) {.cdecl, importc: "glf
 when defined(windows):
   proc getWin32Window*(window: Window): HWND {.cdecl, importc: "glfwGetWin32Window".}
 when defined(linux):
-  proc getX11Window*(window: Window): x11.Window {.cdecl, importc: "glfwGetX11Window".}
+  proc getX11Window*(window: Window): x.Window {.cdecl, importc: "glfwGetX11Window".}
+  proc getX11Display*(): xlib.PDisplay {.cdecl, importc: "glfwGetX11Display".}
 proc createWindow*(width: cint, height: cint, title: cstring, monitor: Monitor, share: Window): Window{.cdecl, importc: "glfwCreateWindow".}
 proc defaultWindowHints*() {.cdecl, importc: "glfwDefaultWindowHints".}
 proc destroyWindow*(window: Window) {.cdecl, importc: "glfwDestroyWindow".}
